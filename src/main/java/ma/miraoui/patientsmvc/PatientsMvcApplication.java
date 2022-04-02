@@ -20,14 +20,14 @@ public class PatientsMvcApplication {
     @Bean
     CommandLineRunner start(PatientRepository patientRepository){
         return args ->{
-            Stream.of("Oussama", "Hamid", "Hassan", "Yasmine").forEach(name->{
+            /*Stream.of("Oussama", "Hamid", "Hassan", "Yasmine", "Mehdi", "Ahmed", "Yassine").forEach(name->{
                 Patient patient = new Patient();
                 patient.setNom(name);
                 patient.setDateNaissance(new Date());
                 patient.setMalade(false);
                 patient.setScore((int) Math.floor(Math.random()*500));
                 patientRepository.save(patient);
-            });
+            });*/
 
             /* patientRepository.findAll().forEach(p->{
                 System.out.println(p.getNom());

@@ -3,30 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
-<body border="1">
-    <h2>Liste des patients</h2>
-    <table class="table table-bordered table-striped">
-        <thead class="bg-secondary">
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Date de naissance</th>
-                <th>Malade</th>
-                <th>Score</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="p:${patients}">
-                <td th:text="${p.id}"></td>
-                <td th:text="${p.nom}"></td>
-                <td th:text="${p.dateNaissance}"></td>
-                <td th:text="${p.malade}"></td>
-                <td th:text="${p.score}"></td>
-            </tr>
-        </tbody>
-    </table>
+<body>
 
+    <div class="container-fluid mt-3">
+        <div class="card">
+            <div class="card-header">
+                Liste des patients
+            </div>
+            <div class="card-body">
+                <form method="get" th:action="@{index}" class="m-4">
+                   <div class="d-flex ">
+                    <input type="text" name="keyword" class="form-control ml-2" id="">
+                    <button type="submit" class="btn btn-success" >Search</button>
+                   </div>
+                </form>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Date de naissance</th>
+                        <th>Malade</th>
+                        <th>Score</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="p:${patients}">
+                        <td th:text="${p.id}"></td>
+                        <td th:text="${p.nom}"></td>
+                        <td th:text="${p.dateNaissance}"></td>
+                        <td th:text="${p.malade}"></td>
+                        <td th:text="${p.score}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <nav>
+                    <ul class="pagination">
+                        <li class="page-item" th:each="page,status:${pages}" >
+                            <a
+                                 class="page-link" href="#"
+                                 th:text="${status.index}"
+                                 th:href="@{index(page=${status.index})}"
+                            >
+                                Previous
+                              <!--  <span th:if="${status.index == currentPage}">
+                                <span class="sr-only">(current)</span>
+                                </span>-->
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>
 </html>
