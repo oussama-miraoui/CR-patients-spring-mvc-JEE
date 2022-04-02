@@ -27,7 +27,7 @@ public class PatientsMvcApplication {
                 patient.setMalade(false);
                 patient.setScore((int) Math.floor(Math.random()*500));
                 patientRepository.save(patient);
-            });*/
+            });
 
             /* patientRepository.findAll().forEach(p->{
                 System.out.println(p.getNom());
