@@ -44,7 +44,7 @@ public class PatientController {
     @GetMapping(path="/delete")
     public String delete(Long id, String keyword, int page){
         patientRepository.deleteById(id);
-        return "redirect:/index?page"+page+"&keyword="+keyword;
+        return "redirect:/index?page+"+page+"&keyword="+keyword;
 
     }
 
@@ -55,7 +55,9 @@ public class PatientController {
     }
 
     @PostMapping(path = "/save")
-    public String save(Model model, @Valid Patient patient, BindingResult bindingResult, int page, String keyword){
+    public String save(Model model, @Valid Patient patient, BindingResult bindingResult,
+                       @RequestParam(name="page", defaultValue = "0") int page,
+                       @RequestParam(name="keyword", defaultValue = "") String keyword){
         if(bindingResult.hasErrors()){
             return "formPatients";
         }
@@ -63,7 +65,7 @@ public class PatientController {
         return "redirect:/index?page="+page+"&keyword="+keyword;
     }
 
-    @GetMapping(path = "/editPatient")
+    @GetMapping(path = "/edit")
     public String editPatient(Long id, Model model , int page, String keyword){
         Patient patient = patientRepository.findById(id).orElse(null);
         model.addAttribute("patient", patient);
