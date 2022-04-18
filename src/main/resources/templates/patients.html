@@ -17,7 +17,7 @@
                     Liste des patients
                 </div>
                 <div class="card-body">
-                    <form method="get" th:action="@{index}" class="m-4">
+                    <form method="get" th:action="@{/user/index}" class="m-4">
                        <div class="d-flex justify-content-between">
                         <input type="text" name="keyword" class="form-control" placeholder="Search for a patient by name ...">
                         <button type="submit" class="btn btn-success" >Search</button>
@@ -42,7 +42,7 @@
                             <td th:text="${p.score}"></td>
                             <td sec:authorize="hasRole('ADMIN')">
                                 <a
-                                        th:href="@{delete(id=${p.id}, page=${currentPage}, keyword=${keyword})}"
+                                        th:href="@{/admin/delete(id=${p.id}, page=${currentPage}, keyword=${keyword})}"
                                         class="btn btn-danger btn-sm"
                                         onclick="return confirm('Vous etes sûr?')"
                                 >Delete</a>
@@ -50,7 +50,7 @@
                             <td sec:authorize="hasRole('ADMIN')">
                                 <a
 
-                                        th:href="@{edit(id=${p.id}, page=${currentPage}, keyword=${keyword})}"
+                                        th:href="@{/admin/edit(id=${p.id}, page=${currentPage}, keyword=${keyword})}"
                                         class="btn btn-warning btn-sm"
                                 >Edit</a>
                             </td>
@@ -62,7 +62,7 @@
                         <ul class="pagination justify-content-center">
                             <li th:class="${ currentPage <= 0 ? 'page-item disabled' : 'page-item'}">
                                 <a class="page-link"
-                                   th:href="@{index(page=${currentPage - 1}, keyword=${keyword})}">
+                                   th:href="@{/user/index(page=${currentPage - 1}, keyword=${keyword})}">
                                     Previous
                                 </a>
                             </li>
@@ -71,12 +71,12 @@
                                 >
                                 <a class="page-link"
                                    th:text="${status.index}"
-                                   th:href="@{index(page=${status.index}, keyword=${keyword})}">
+                                   th:href="@{/user/index(page=${status.index}, keyword=${keyword})}">
                                 </a>
                             </li>
                             <li th:class="${currentPage >= totalPage - 1 ? 'page-item disabled' : 'page-item'}">
                                 <a class="page-link"
-                                   th:href="@{index(page=${currentPage + 1}, keyword=${keyword})}">
+                                   th:href="@{/userindex(page=${currentPage + 1}, keyword=${keyword})}">
                                     Next
                                 </a>
                             </li>

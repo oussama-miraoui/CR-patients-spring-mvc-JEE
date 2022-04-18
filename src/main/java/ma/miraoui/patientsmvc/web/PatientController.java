@@ -22,11 +22,11 @@ public class PatientController {
     private PatientRepository patientRepository;
 
     @GetMapping(path = "/")
-    public String indexPage(){
-        return "redirect:/index";
+    public String home(){
+        return "home";
     }
 
-    @GetMapping(path = "index")
+    @GetMapping(path = "/user/index")
     public String patients(Model model,
                            @RequestParam(name  = "page", defaultValue = "0") int page,
                            @RequestParam(name = "size", defaultValue = "5") int size,
@@ -41,20 +41,20 @@ public class PatientController {
 
         return "patients";
     }
-    @GetMapping(path="/delete")
+    @GetMapping(path="/admin/delete")
     public String delete(Long id, String keyword, int page){
         patientRepository.deleteById(id);
-        return "redirect:/index?page+"+page+"&keyword="+keyword;
+        return "redirect:/user/index?page="+page+"&keyword="+keyword;
 
     }
 
-    @GetMapping(path = "/formPatients")
+    @GetMapping(path = "/admin/formPatients")
     public String formPatients(Model model){
         model.addAttribute("patient", new Patient());
         return "formPatients";
     }
 
-    @PostMapping(path = "/save")
+    @PostMapping(path = "/admin/save")
     public String save(Model model, @Valid Patient patient, BindingResult bindingResult,
                        @RequestParam(name="page", defaultValue = "0") int page,
                        @RequestParam(name="keyword", defaultValue = "") String keyword){
@@ -62,10 +62,10 @@ public class PatientController {
             return "formPatients";
         }
         patientRepository.save(patient);
-        return "redirect:/index?page="+page+"&keyword="+keyword;
+        return "redirect:/user/index?page="+page+"&keyword="+keyword;
     }
 
-    @GetMapping(path = "/edit")
+    @GetMapping(path = "/admin/edit")
     public String editPatient(Long id, Model model , int page, String keyword){
         Patient patient = patientRepository.findById(id).orElse(null);
         model.addAttribute("patient", patient);

@@ -19,7 +19,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" th:href="@{index}">Home</a>
+                <a class="nav-link" th:href="@{/user/index}">Home</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -29,22 +29,31 @@
                     <a
                             sec:authorize="hasRole('ADMIN')"
                             class="dropdown-item"
-                            th:href="@{/formPatients}">
+                            th:href="@{/admin/formPatients}">
                         Nouveau patient
                     </a>
-                    <a class="dropdown-item" th:href="@{index}">Chercher patient</a>
+                    <a class="dropdown-item" th:href="@{/user/index}">Chercher patient</a>
 
                 </div>
             </li>
-            <li class="nav-item dropdown mr-auto">
+
+
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span sec:authentication="name"></span>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                    <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                    <li> <a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
 
-                </div>
+                </ul>
             </li>
+
+            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                <a class="nav-link" th:href="@{/login}">Login</a>
+            </li>
+
         </ul>
     </div>
 </nav>
