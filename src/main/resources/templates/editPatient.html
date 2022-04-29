@@ -9,7 +9,7 @@
     <title>Edit Patient:</title>
 </head>
 <body>
-    <div layout:fragment="content" class="container col-md-6 m-4">
+    <div layout:fragment="content" class="container col-md-6 m-auto p-3 bg-light">
         <h4>Edit patient: </h4>
         <form th:action="@{/admin/save(page=${page}, keyword=${keyword})}" method="post">
 
@@ -41,7 +41,16 @@
                 <input type="text" id="score" class="form-control" name="score" th:value="${patient.score}">
                 <span th:errors="${patient.score}" class="text-danger"></span>
             </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Save
+                </button>
+                <a th:href="@{/user/patients}" class="btn btn-dark">
+                    <i class="fa-solid fa-backward"></i>
+                    Back
+                </a>
+            </div>
         </form>
     </div>
 </body>

@@ -26,7 +26,7 @@ public class PatientController {
         return "home";
     }
 
-    @GetMapping(path = "/user/index")
+    @GetMapping(path = "/user/patients")
     public String patients(Model model,
                            @RequestParam(name  = "page", defaultValue = "0") int page,
                            @RequestParam(name = "size", defaultValue = "5") int size,
@@ -44,7 +44,7 @@ public class PatientController {
     @GetMapping(path="/admin/delete")
     public String delete(Long id, String keyword, int page){
         patientRepository.deleteById(id);
-        return "redirect:/user/index?page="+page+"&keyword="+keyword;
+        return "redirect:/user/patients?page="+page+"&keyword="+keyword;
 
     }
 
@@ -62,7 +62,7 @@ public class PatientController {
             return "formPatients";
         }
         patientRepository.save(patient);
-        return "redirect:/user/index?page="+page+"&keyword="+keyword;
+        return "redirect:/user/patients?page="+page+"&keyword="+keyword;
     }
 
     @GetMapping(path = "/admin/edit")
